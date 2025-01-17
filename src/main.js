@@ -11,3 +11,11 @@ import { createGalleryCardTemplate } from './js/render-function';
 
 const serchFormEl = document.querySelector('search-input');
 const btnFormEl = document.querySelector('search-btn');
+const onSearchFormSubmit = event => {
+  event.preventDefault();
+  const searchedQuery = event.currentTarget.elements.value;
+  
+};
+
+btnFormEl.addEventListener("submit", onSearchFormSubmit);
+  
