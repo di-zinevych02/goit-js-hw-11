@@ -8,7 +8,7 @@
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
 }
-.is-hidden {
+.loader-hidden {
     display: none;
 }
 @keyframes rotation {

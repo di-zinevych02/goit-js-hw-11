@@ -15,11 +15,13 @@ const galleryEl = document.querySelector('.js-gallery');
 const loader = document.querySelector('.loader');
 
 const onSearchFormSubmit = event => {
+  loader.style.display = 'block';
   event.preventDefault();
 
   const searchedQuery = event.currentTarget.elements.user_query.value.trim();
 
   if (searchedQuery === "") {
+    loader.style.display = 'none';
     iziToast.warning({
       message: 'Please enter a search term.',
       position: 'topRight',
@@ -27,12 +29,9 @@ const onSearchFormSubmit = event => {
 
     return;
   }
-  loader.classList.add('active'); // Показати індикатор завантаження
   
   fetchPhotosByQuery(searchedQuery)
     .then(data => {
-      loader.classList.remove('active');
-
       if (data.hits.length === 0) {
         iziToast.info({
           message: 'Sorry, there are no images matching your search query. Please try again!',
@@ -41,15 +40,14 @@ const onSearchFormSubmit = event => {
         // Очищаємо галерею перед новим запитом
         galleryEl.innerHTML = '';
 
-        //  Очищаємо інпут через форму при умові, якщо повернеться порожній масив
+        //  Очищаємо інпут через форму при умові, якщо повернеться порожній масив 
         searchFormEl.reset();
 
         return;
       }
       
-
       const galleryTemplate = data.hits.map(el => createGalleryCardTemplate(el)).join('');
-
+      
       galleryEl.innerHTML = galleryTemplate;
       
       const lightbox = new SimpleLightbox('.gallery a', {
@@ -68,7 +66,8 @@ const onSearchFormSubmit = event => {
       console.error('Error fetching data:', error);
     })
     .finally(() => {
-      loader.classList.add('active');
+
+      loader.style.display = 'none';
     });
 }
 serchFormEl.addEventListener('submit', onSearchFormSubmit);
