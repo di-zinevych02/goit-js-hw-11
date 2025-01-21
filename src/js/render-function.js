@@ -1,6 +1,6 @@
 export const createGalleryCardTemplate = imgInfo => {
     return `
-    <li class="gallery-card">
+    <li class="gallery-item">
     <a class="gallery-link" href="${imgInfo.webformatURL}">
     <img class="gallery-img"
     src="${imgInfo.largeImageURL}" 

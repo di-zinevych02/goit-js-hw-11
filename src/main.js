@@ -33,7 +33,7 @@ const onSearchFormSubmit = event => {
   fetchPhotosByQuery(searchedQuery)
     .then(data => {
       if (data.hits.length === 0) {
-        iziToast.info({
+        iziToast.error({
           message: 'Sorry, there are no images matching your search query. Please try again!',
           position: 'topRight',
         });
@@ -41,7 +41,7 @@ const onSearchFormSubmit = event => {
         galleryEl.innerHTML = '';
 
         //  Очищаємо інпут через форму при умові, якщо повернеться порожній масив 
-        searchFormEl.reset();
+        serchFormEl.reset();
 
         return;
       }
@@ -60,10 +60,9 @@ const onSearchFormSubmit = event => {
     .catch(err => {
       iziToast.error({
         title: 'Error',
-        message: 'Something went wrong, please try again later.',
+        message: 'Something went wrong, please try again later',
         position: 'topRight',
       });
-      console.error('Error fetching data:', error);
     })
     .finally(() => {
 
